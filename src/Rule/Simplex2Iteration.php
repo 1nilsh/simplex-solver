@@ -4,7 +4,7 @@ namespace Rule;
 
 use Exception;
 
-class SimplexIteration
+class Simplex2Iteration
 {
     public function apply(array $lp): array
     {

@@ -1,5 +1,6 @@
 <?php
 
+namespace Printer;
 
 class LpPrinter
 {

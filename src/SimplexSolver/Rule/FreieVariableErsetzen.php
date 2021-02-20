@@ -1,6 +1,6 @@
 <?php
 
-namespace Rule;
+namespace SimplexSolver\Rule;
 
 class FreieVariableErsetzen
 {

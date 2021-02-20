@@ -1,13 +1,16 @@
 <?php
 
-use Rule\BasisloesungHerstellen;
-use Rule\FreieVariableErsetzen;
-use Rule\GleichungenZuUngleichungen;
-use Rule\MinToMaxZielfunktion;
-use Rule\Schlupfvariablen;
-use Rule\Simplex2Iteration;
+namespace SimplexSolver;
 
-class Simplex2Solver
+use Printer\LpPrinter;
+use SimplexSolver\Rule\BasisloesungHerstellen;
+use SimplexSolver\Rule\FreieVariableErsetzen;
+use SimplexSolver\Rule\GleichungenZuUngleichungen;
+use SimplexSolver\Rule\MinToMaxZielfunktion;
+use SimplexSolver\Rule\Schlupfvariablen;
+use SimplexSolver\Rule\Simplex2Iteration;
+
+class SimplexSolver
 {
     private LpPrinter $printer;
     private FreieVariableErsetzen $freieVariableErsetzenRule;

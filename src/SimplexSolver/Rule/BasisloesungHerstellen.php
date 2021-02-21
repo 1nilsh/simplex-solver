@@ -9,17 +9,25 @@ class BasisloesungHerstellen
         $newLp = $lp;
 
         foreach ($lp['st'] as $key => $restriktionszeile) {
-            $newLp['st'][$key]['b'] = $restriktionszeile['schranke'];
-
             end($restriktionszeile['x']);
-            $newLp['st'][$key]['schranke'] = key($restriktionszeile['x']);
+            $schlupfvariable = key($restriktionszeile['x']);
+            $newLp['st'][$key]['schranke'] = $schlupfvariable;
+            $schlupfKoeffizient = $restriktionszeile['x'][$schlupfvariable];
             reset($restriktionszeile['x']);
+
+            if ($schlupfKoeffizient < 0) {
+                $newLp['st'][$key]['b'] = -$restriktionszeile['schranke'];
+            } else{
+                $newLp['st'][$key]['b'] = $restriktionszeile['schranke'];
+            }
 
             array_pop($newLp['st'][$key]['x']);
             array_pop($restriktionszeile['x']);
 
-            foreach ($restriktionszeile['x'] as $variable => $koeffizient) {
-                $newLp['st'][$key]['x'][$variable] = (-1) * $koeffizient;
+            if ($schlupfKoeffizient > 0) {
+                foreach ($restriktionszeile['x'] as $variable => $koeffizient) {
+                    $newLp['st'][$key]['x'][$variable] = (-1) * $koeffizient;
+                }
             }
         }
 

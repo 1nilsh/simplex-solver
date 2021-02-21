@@ -9,7 +9,8 @@ use SimplexSolver\Rule\FreieVariableErsetzen;
 use SimplexSolver\Rule\GleichungenZuUngleichungen;
 use SimplexSolver\Rule\MinToMaxZielfunktion;
 use SimplexSolver\Rule\Schlupfvariablen;
-use SimplexSolver\Rule\Simplex2Iteration;
+use SimplexSolver\Rule\Simplex1Iteration;
+use SimplexSolver\Rule\SimplexIteration;
 use SimplexSolver\SimplexSolver;
 
 class SimplexSolverFactory
@@ -34,7 +35,8 @@ class SimplexSolverFactory
             $this->container->get(MinToMaxZielfunktion::class),
             $this->container->get(Schlupfvariablen::class),
             $this->container->get(BasisloesungHerstellen::class),
-            $this->container->get(Simplex2Iteration::class),
+            $this->container->get(Simplex1Iteration::class),
+            $this->container->get(SimplexIteration::class),
         );
     }
 }

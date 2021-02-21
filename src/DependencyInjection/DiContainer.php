@@ -21,11 +21,10 @@ class DiContainer
      */
     public function get(string $className)
     {
-
         if (isset($this->config[$className])) {
             $factory = new $this->config[$className]($this);
         } else {
-            $factory = new DefaultFactory($className);
+            $factory = new DefaultFactory($className, $this);
         }
 
         return $factory->build();

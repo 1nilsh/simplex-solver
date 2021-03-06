@@ -11,11 +11,14 @@ class Schlupfvariablen
         $n = $startname;
         foreach ($lp['st'] as $key => $value) {
             $schlupfKoeff = 0;
-            if ($lp['st'][$key]['operator'] === '<=') {
-                $schlupfKoeff = 1;
-            }
-            if ($lp['st'][$key]['operator'] === '>=') {
-                $schlupfKoeff = -1;
+
+            switch ($lp['st'][$key]['operator']) {
+                case '>=':
+                    $schlupfKoeff = -1;
+                    break;
+                case '<=':
+                    $schlupfKoeff = 1;
+                    break;
             }
 
             $newLp['st'][$key]['x']['x' . $n] = $schlupfKoeff;

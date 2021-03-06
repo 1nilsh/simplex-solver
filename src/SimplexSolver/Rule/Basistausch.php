@@ -52,13 +52,14 @@ class Basistausch
                 $neueRestriktionszeile['x'][$variable] = $koeffizient / $reinVariableKoeffizient;
             }
 
-            $neueRestriktionszeile['x'][$rausVariable] = -1 / $reinVariableKoeffizient;
+            $neueRestriktionszeile['x'][$rausVariable] = -1 / ((-1) * $reinVariableKoeffizient);
         }
 
         unset($lp['st'][$rausIndex]); // raus restriktion entfernen
         $lp['st'] = array_values($lp['st']);
 
         $lp['zf'] = $this->termumformung($lp['zf'], $rausVariable, $reinVariable, $neueRestriktionszeile);
+        ksort($lp['zf']['x']);
 
         foreach ($lp['st'] as $key => $restriktionszeile) {
             $lp['st'][$key] = $this->termumformung($lp['st'][$key], $rausVariable, $reinVariable, $neueRestriktionszeile);
@@ -66,9 +67,14 @@ class Basistausch
 
         if (isset($lp['szf'])) {
             $lp['szf'] = $this->termumformung($lp['szf'], $rausVariable, $reinVariable, $neueRestriktionszeile);
+            ksort($lp['szf']['x']);
         }
 
         $lp['st'][] = $neueRestriktionszeile; // rein restriktion einfügen
+
+        usort($lp['st'], function (array $a, array $b) {
+            return strcmp($a['schranke'], $b['schranke']);
+        });
 
         return $lp;
     }
@@ -86,8 +92,11 @@ class Basistausch
 
         $term['b'] += $reinKoeff * $neueRestriktionszeile['b'];
         foreach ($term['x'] as $variable => $koeffizient) {
+            if (!isset($neueRestriktionszeile['x'][$variable])) continue;
+
             $term['x'][$variable] += $reinKoeff * $neueRestriktionszeile['x'][$variable];
-            if ($term['x'][$variable] === 0) {
+
+            if ($term['x'][$variable] == 0) {
                 unset($term['x'][$variable]);
             }
         }

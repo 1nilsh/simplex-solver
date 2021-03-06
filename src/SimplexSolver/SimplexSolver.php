@@ -48,6 +48,7 @@ class SimplexSolver
         $this->executeSteps(
             [
                 'Ausgangsmodell',
+                'Gleichungen zu Ungleichungen',
                 'Schlupfvariablen',
                 'Basislösung',
                 'Phase1 Zielfunktion',
@@ -87,32 +88,32 @@ class SimplexSolver
 
                 case 'Schlupfvariablen':
                     echo 'Schlupfvariablen: ' . PHP_EOL;
-                    $lp = $this->schlupfvariablenRule->apply($lp, 3);
+                    $lp = $this->schlupfvariablenRule->apply($lp, 4);
                     $this->printer->print($lp);
                     break;
 
                 case 'Basislösung':
                     echo 'Basislösung:' . PHP_EOL;
                     $lp = $this->basisloesungRule->apply($lp);
-                    $this->printer->print($lp);
+                    $this->printer->print($lp, LpPrinter::PRINT_DIRECTION_REVERSE);
                     break;
 
                 case 'Phase1 Zielfunktion':
                     echo 'Phase1 Zielfunktion:' . PHP_EOL;
                     $lp = $this->phase1ZielfunktionRule->apply($lp);
-                    $this->printer->print($lp);
+                    $this->printer->print($lp, LpPrinter::PRINT_DIRECTION_REVERSE);
                     break;
 
                 case 'Simplex1 Iteration':
                     echo 'Simplex1 Iteration:' . PHP_EOL;
-                    $lp = $this->simplexIterationRule->apply($lp);
-                    $this->printer->print($lp);
+                    $lp = $this->simplexIterationRule->apply($lp, 'szf');
+                    $this->printer->print($lp, LpPrinter::PRINT_DIRECTION_REVERSE);
                     break;
 
                 case 'Simplex2 Iteration':
                     echo 'Simplex2 Iteration:' . PHP_EOL;
                     $lp = $this->simplexIterationRule->apply($lp);
-                    $this->printer->print($lp);
+                    $this->printer->print($lp, LpPrinter::PRINT_DIRECTION_REVERSE);
                     break;
             }
         }

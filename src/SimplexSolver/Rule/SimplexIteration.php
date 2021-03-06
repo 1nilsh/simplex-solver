@@ -14,13 +14,13 @@ class SimplexIteration
     }
 
 
-    public function apply(array $lp): array
+    public function apply(array $lp, string $zfName = 'zf'): array
     {
         $newLp = $lp;
 
         $groessterKoeff = 0;
         $groessterKoeffBei = null;
-        foreach ($lp['szf']['x'] as $variable => $koeffizient) {
+        foreach ($lp[$zfName]['x'] as $variable => $koeffizient) {
             if ($koeffizient > $groessterKoeff) {
                 $groessterKoeff = $koeffizient;
                 $groessterKoeffBei = $variable;
@@ -37,7 +37,7 @@ class SimplexIteration
         $minBeschraenkungBei = null;
         foreach ($lp['st'] as $restriktionszeile) {
             $beschr = $restriktionszeile['b'] / ($restriktionszeile['x'][$groessterKoeffBei] * (-1));
-            if ($beschr > 0 && $beschr < $minBeschraenkung) {
+            if ($beschr >= 0 && $beschr < $minBeschraenkung) {
                 $minBeschraenkung = $beschr;
                 $minBeschraenkungBei = $restriktionszeile['schranke'];
             }

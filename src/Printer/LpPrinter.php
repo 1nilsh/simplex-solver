@@ -76,6 +76,8 @@ class LpPrinter
     {
         if (!is_numeric($zahl)) return $zahl;
 
+        if ($zahl == 0) return '0';
+
         if ((int)$zahl == $zahl) return $zahl;
 
         return number_format(

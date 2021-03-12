@@ -44,15 +44,15 @@ class Basistausch
         }
 
         if ($reinVariableVorzeichen < 0) {
-            $neueRestriktionszeile['b'] = $alteRestriktionszeile['b'] / $reinVariableKoeffizient;
+            $neueRestriktionszeile['b'] = $alteRestriktionszeile['b'] / ($reinVariableKoeffizient * $reinVariableVorzeichen);
 
             foreach ($alteRestriktionszeile['x'] as $variable => $koeffizient) {
                 if ($variable === $reinVariable) continue;
 
-                $neueRestriktionszeile['x'][$variable] = $koeffizient / $reinVariableKoeffizient;
+                $neueRestriktionszeile['x'][$variable] = $koeffizient / ($reinVariableKoeffizient * $reinVariableVorzeichen);
             }
 
-            $neueRestriktionszeile['x'][$rausVariable] = -1 / ((-1) * $reinVariableKoeffizient);
+            $neueRestriktionszeile['x'][$rausVariable] = -1 / ($reinVariableKoeffizient * $reinVariableVorzeichen);
         }
 
         unset($lp['st'][$rausIndex]); // raus restriktion entfernen

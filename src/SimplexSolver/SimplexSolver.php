@@ -48,11 +48,7 @@ class SimplexSolver
         $this->executeSteps(
             [
                 'Ausgangsmodell',
-                'Gleichungen zu Ungleichungen',
-                'Schlupfvariablen',
-                'Basislösung',
                 'Phase1 Zielfunktion',
-                'Simplex1 Iteration',
                 'Simplex1 Iteration',
             ],
             $lp
@@ -70,7 +66,7 @@ class SimplexSolver
 
                 case 'Freie Variablen ersetzen':
                     echo 'Freie Variablen ersetzen: ' . PHP_EOL;
-                    $lp = $this->freieVariableErsetzenRule->apply($lp, 'x3');
+                    $lp = $this->freieVariableErsetzenRule->apply($lp, 'x2');
                     $this->printer->print($lp);
                     break;
 
@@ -88,7 +84,7 @@ class SimplexSolver
 
                 case 'Schlupfvariablen':
                     echo 'Schlupfvariablen: ' . PHP_EOL;
-                    $lp = $this->schlupfvariablenRule->apply($lp, 4);
+                    $lp = $this->schlupfvariablenRule->apply($lp, 3);
                     $this->printer->print($lp);
                     break;
 

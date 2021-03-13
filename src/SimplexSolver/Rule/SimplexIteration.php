@@ -36,6 +36,7 @@ class SimplexIteration
         $minBeschraenkung = PHP_INT_MAX;
         $minBeschraenkungBei = null;
         foreach ($lp['st'] as $restriktionszeile) {
+            if(!isset($restriktionszeile['x'][$groessterKoeffBei]) || $restriktionszeile['x'][$groessterKoeffBei] == 0) continue;
             $beschr = $restriktionszeile['b'] / ($restriktionszeile['x'][$groessterKoeffBei] * (-1));
             if ($beschr >= 0 && $beschr < $minBeschraenkung) {
                 $minBeschraenkung = $beschr;

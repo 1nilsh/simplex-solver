@@ -81,6 +81,10 @@ class Basistausch
 
     private function termumformung(array $term, string $rausVar, string $reinVar, array $neueRestriktionszeile): array
     {
+        if(!isset($term['x'][$reinVar])) {
+            $term['x'][$reinVar] = 0;
+        }
+
         $reinKoeff = $term['x'][$reinVar];
         unset($term['x'][$reinVar]);
 
